@@ -1,7 +1,7 @@
 import pandas as pd
 import sqlite3
 
-df = pd.read_csv("quran_data.csv", index_col=False)
+df = pd.read_csv("../quran_data.csv", index_col=False)
 
 columns = ""
 for i in df.columns:
