@@ -7,7 +7,10 @@ pd.set_option('display.max_rows', None)
 
 class DataManager():
     def __init__(self):
+        #self.data = pd.read_csv("quran_data.csv", index_col = False)
+        ##when exporting to pythonanywhere add path file here
         self.data = pd.read_csv("quran_data.csv", index_col = False)
+
     def view_data(self):
         data_info = [self.data.info(), self.data.describe(), self.data.columns]
         return data_info
@@ -20,14 +23,12 @@ class DataManager():
     def view_surah(self, surah_num):
         return self.data[self.data["surah_no"] == surah_num][["surah_no", "surah_name_roman", "ayah_no_surah", "ayah_memorized"]]
     def view_ayah_memorized(self, surah_num, ayah_nums):
-        srs = pd.Series(any(ayah_nums), index=ayah_nums)
-        for ayah_num in ayah_nums:
-            condition = (self.data.surah_no == surah_num) & (self.data.ayah_no_surah == ayah_num)
-            srs[ayah_num] = self.data.loc[condition]["ayah_memorized"]
-        return srs
+        memorized = False
+        if  self.view_ayah(surah_num, ayah_nums)["ayah_memorized"].all():
+            memorized = True
+        return memorized
     def view_surah_memorized(self, surah_num):
         memorized = False
-        print(self.view_surah(surah_num)["ayah_memorized"])
         if  self.view_surah(surah_num)["ayah_memorized"].all():
             memorized = True
         return memorized
@@ -52,7 +53,7 @@ class DataManager():
 
 if __name__ == "__main__": #checks if this is imported module
     app = DataManager()
-    print(app.view_surah_memorized(114))
+    print(app.view_ayah_memorized(3,[1,2]))
     # print(app.view_ayah_memorized(1,[2,3,4]))
     # print(app.view_ayah(1,[2,3,4]))
 
