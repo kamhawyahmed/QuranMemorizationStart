@@ -10,7 +10,6 @@ from flask import request
 import QuranDataManager
 import sqlite3
 
-NUM_SURAH = 114
 
 
 backend = QuranDataManager.DataManager()
@@ -22,22 +21,18 @@ memorized_surahs = []
 app_on = True
 
 
-
+@app.route('/test', methods=['GET', 'POST'])
+def test():
+    return render_template("test.html")
 
 @app.route('/', methods=['GET', 'POST'])
 def quran_memorization_page():
     if request.method == 'POST':
         print(request.form)
         if "app_on" in request.form:
-            global app_on
-            app_on = not app_on
+            toggle_app()
         elif "show_memorized" in request.form:
-            print("hi")
-            global memorized_surahs
-            memorized_surahs = []
-            for surah_name in backend.return_memorized_ayat()["surah_name_roman"]:
-                memorized_surahs.append(surah_name)
-            memorized_surahs = list(set(memorized_surahs))
+            show_memorized_surah()
         else:
             for key in request.form.keys():
                 if key.split("_")[1] == "surah":
@@ -47,6 +42,19 @@ def quran_memorization_page():
                 elif key.split("_")[0] == "select":
                     select_surah()
     return update_page()
+
+def toggle_app():
+    global app_on
+    app_on = not app_on
+    return
+
+def show_memorized_surah():
+    print("hi")
+    global memorized_surahs
+    memorized_surahs = []
+    for surah_name in backend.return_memorized_ayat()["surah_name_roman"]:
+        memorized_surahs.append(surah_name)
+    memorized_surahs = list(set(memorized_surahs))
 
 def select_surah():
     global surah_shown_index
@@ -68,7 +76,7 @@ def toggle_memorized_ayah():
     return
 
 def update_page():
-    return render_template("request.html", num_surah = NUM_SURAH, memorized_surahs = memorized_surahs, backend = backend, app_on = app_on, surah_shown_index = surah_shown_index)
+    return render_template("memorization.html", memorized_surahs = memorized_surahs, backend = backend, app_on = app_on, surah_shown_index = surah_shown_index)
 
 
 if __name__ == "__main__":

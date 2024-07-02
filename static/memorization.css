@@ -1,4 +1,8 @@
 /* CSS */
+:root {
+  --ayah-num-size: 40px;
+}
+
 div {
  text-align: center;
 }
@@ -62,9 +66,35 @@ input:active {
 }
 
 .ayah {
-  width: 32px;
-  height: 32px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  grid-auto-rows: minmax(35px, auto);
+  padding: 0 200px;
 }
+.ayah_num_div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.ayah_num {
+  width: var(--ayah-num-size);
+  height: var(--ayah-num-size);
+
+}
+
+.ayah_text_div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.ayah_text {
+  font-size: 30px;
+  }
 
 .memorized {
   background-color: #d4af37;
@@ -91,4 +121,15 @@ input:active {
   margin: 10px;
   border: 3px solid #f0f0f0;
   background-color: #f0f0f0;
+  }
+
+.surah_list {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 3px;
+  grid-auto-rows: minmax(35px, auto);
+  }
+
+.hidden {
+  display: none;
   }

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="static/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="static/test.js"></script>
+    <script>
+        $('div').on('click', function () {
+          alert( "Handler for `click` called." );
+        });
+    </script>
+</head>
+<body>
+{% if app_on == False: %}
+    <form method="POST">
+        <input class="button-3" type="submit" name="app_on" value="Turn on app">
+    </form>
+{% else: %}
+    <div class="memorized_header">
+        <h1>Qur'an Memorization Tracker</h1>
+
+    </div>
+    <div>
+        <i class="fa fa-bars" id="menu_toggle" aria-hidden="true"></i>
+    </div>
+    <div id="ok"><h1>ok</h1></div>
+{% endif %}
+</body>
+</html>

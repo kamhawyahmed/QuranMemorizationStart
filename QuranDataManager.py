@@ -18,7 +18,7 @@ class DataManager():
         df = pd.DataFrame()
         for ayah_num in ayah_nums:
             condition = (self.data.surah_no == surah_num) & (self.data.ayah_no_surah == ayah_num)
-            df = pd.concat([df,self.data.loc[(condition)][["surah_no", "surah_name_roman", "ayah_ar", "ayah_no_surah", "ayah_memorized"]]])
+            df = pd.concat([df,self.data.loc[(condition)][["surah_no", "juz_no", "surah_name_roman", "ayah_ar", "ayah_no_surah", "ayah_memorized"]]])
         return df
     def view_surah(self, surah_num):
         return self.data[self.data["surah_no"] == surah_num][["surah_no", "surah_name_roman", "ayah_no_surah", "ayah_memorized"]]
@@ -32,6 +32,8 @@ class DataManager():
         if  self.view_surah(surah_num)["ayah_memorized"].all():
             memorized = True
         return memorized
+    def view_surah_juz_num(self, surah_num):
+        return self.view_ayah(surah_num, [1])["juz_no"].item()
     def return_length_of_surah(self, surah_num):
         return len(self.view_surah(surah_num))
     def mark_ayah(self, surah_num, ayah_nums):
@@ -53,7 +55,8 @@ class DataManager():
 
 if __name__ == "__main__": #checks if this is imported module
     app = DataManager()
-    print(app.view_ayah_memorized(3,[1,2]))
+    print(app.view_ayah(78,[1])["juz_no"].item())
+    print(app.view_surah_juz_num(78))
     # print(app.view_ayah_memorized(1,[2,3,4]))
     # print(app.view_ayah(1,[2,3,4]))
 

@@ -4,9 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e75b1e10-3b57-4445-b2cc-e55ee6a63e79" name="Changes" comment="pyanywhere changes">
+    <list default="true" id="e75b1e10-3b57-4445-b2cc-e55ee6a63e79" name="Changes" comment="reorganizing file structure">
+      <change afterPath="$USER_HOME$/PycharmProjects/QuranMemorizationStart/static/memorization.js" afterDir="false" />
+      <change afterPath="$USER_HOME$/PycharmProjects/QuranMemorizationStart/templates/memorization.html" afterDir="false" />
       <change beforePath="$USER_HOME$/PycharmProjects/QuranMemorizationStart/.idea/workspace.xml" beforeDir="false" afterPath="$USER_HOME$/PycharmProjects/QuranMemorizationStart/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$USER_HOME$/PycharmProjects/QuranMemorizationStart/templates/request.html" beforeDir="false" afterPath="$USER_HOME$/PycharmProjects/QuranMemorizationStart/templates/request.html" afterDir="false" />
+      <change beforePath="$USER_HOME$/PycharmProjects/QuranMemorizationStart/QuranDataManager.py" beforeDir="false" afterPath="$USER_HOME$/PycharmProjects/QuranMemorizationStart/QuranDataManager.py" afterDir="false" />
+      <change beforePath="$USER_HOME$/PycharmProjects/QuranMemorizationStart/main.py" beforeDir="false" afterPath="$USER_HOME$/PycharmProjects/QuranMemorizationStart/main.py" afterDir="false" />
+      <change beforePath="$USER_HOME$/PycharmProjects/QuranMemorizationStart/quran_data.csv" beforeDir="false" afterPath="$USER_HOME$/PycharmProjects/QuranMemorizationStart/quran_data.csv" afterDir="false" />
+      <change beforePath="$USER_HOME$/PycharmProjects/QuranMemorizationStart/static/styles.css" beforeDir="false" afterPath="$USER_HOME$/PycharmProjects/QuranMemorizationStart/static/memorization.css" afterDir="false" />
+      <change beforePath="$USER_HOME$/PycharmProjects/QuranMemorizationStart/static/test.js" beforeDir="false" />
+      <change beforePath="$USER_HOME$/PycharmProjects/QuranMemorizationStart/templates/request.html" beforeDir="false" afterPath="$USER_HOME$/PycharmProjects/QuranMemorizationStart/templates/test.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +58,7 @@
       <recent name="$USER_HOME$/PycharmProjects/QuranMemorizationStart" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$USER_HOME$/PycharmProjects/QuranMemorizationStart/archive" />
       <recent name="$USER_HOME$/PycharmProjects/QuranMemorizationStart" />
     </key>
   </component>
@@ -100,7 +108,21 @@
       <option name="project" value="LOCAL" />
       <updated>1718979771689</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="reorganizing file structure">
+      <created>1718980518325</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1718980518325</updated>
+    </task>
+    <task id="LOCAL-00004" summary="reorganizing file structure">
+      <created>1718980523455</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1718980523455</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -129,6 +151,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="v1" />
     <MESSAGE value="pyanywhere changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="pyanywhere changes" />
+    <MESSAGE value="reorganizing file structure" />
+    <option name="LAST_COMMIT_MESSAGE" value="reorganizing file structure" />
   </component>
 </project>
