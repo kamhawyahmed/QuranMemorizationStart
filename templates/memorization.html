@@ -3,11 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="/static/memorization.css">
+    <title>QMTracker</title>
+    <link rel="stylesheet" href="static/memorization.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="/static/memorization.js"></script>
+    <script type="text/javascript" src="static/memorization.js"></script>
 </head>
 <body>
 {% if app_on == False: %}
@@ -27,11 +27,17 @@
 <!--        <input type="submit" name="show_memorized" value="Show Memorized">-->
 <!--        <p>Memorized Surahs: <br>{{memorized_surahs}}</p>-->
 <!--        <h2>Surah List</h2>-->
-        <div class="surah_list">
+        <div class="surah_list hidden">
 
-            {% for i in range(1,115) %}
-            <input class="{{'memorized' if backend.view_surah_memorized(i) else 'unmemorized'}}" type="submit" name="select_{{i}}" value="{{backend.view_ayah(i,[1])['surah_name_roman'].item()}} - {{i}} J{{backend.view_surah_juz_num(i)}}">
+            {% for i in range(1,31) %}
+                <div class="juz" style="background-color: #EBEBEB">
+                    <p>Juz' {{i}}</p>
+                {% for idx, surah in surah_list[surah_list["juz_no"] == i].iterrows() %}
+                    <input class="{{'memorized' if backend.view_surah_memorized(surah['surah_no']) else 'unmemorized'}} surah_list_surah" type="submit" name="select_{{surah['surah_no']}}" value="{{surah['surah_name_roman']}} - {{surah['surah_no']}}">
+                {% endfor %}
+                </div>
             {% endfor %}
+
         </div>
 
     </form>

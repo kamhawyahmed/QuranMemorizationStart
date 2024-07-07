@@ -17,6 +17,7 @@ app = Flask(__name__)
 
 surah_shown_index = 1
 memorized_surahs = []
+surah_list = backend.make_mock_surah_list()
 
 app_on = True
 
@@ -41,6 +42,9 @@ def quran_memorization_page():
                     toggle_memorized_ayah()
                 elif key.split("_")[0] == "select":
                     select_surah()
+    for idx, surah in surah_list[surah_list["juz_no"] == 1].iterrows():
+        print(surah["juz_no"])
+        # print(type(surah_list[surah_list["juz_no"] == 1]))
     return update_page()
 
 def toggle_app():
@@ -76,7 +80,7 @@ def toggle_memorized_ayah():
     return
 
 def update_page():
-    return render_template("memorization.html", memorized_surahs = memorized_surahs, backend = backend, app_on = app_on, surah_shown_index = surah_shown_index)
+    return render_template("memorization.html", memorized_surahs = memorized_surahs, backend = backend, app_on = app_on, surah_shown_index = surah_shown_index, surah_list = surah_list)
 
 
 if __name__ == "__main__":

@@ -5,6 +5,7 @@ import numpy as np
 pd.set_option('display.max_columns', None)
 pd.set_option('display.max_rows', None)
 
+NUM_SURAH = 114
 class DataManager():
     def __init__(self):
         #self.data = pd.read_csv("quran_data.csv", index_col = False)
@@ -21,7 +22,13 @@ class DataManager():
             df = pd.concat([df,self.data.loc[(condition)][["surah_no", "juz_no", "surah_name_roman", "ayah_ar", "ayah_no_surah", "ayah_memorized"]]])
         return df
     def view_surah(self, surah_num):
-        return self.data[self.data["surah_no"] == surah_num][["surah_no", "surah_name_roman", "ayah_no_surah", "ayah_memorized"]]
+        return self.data[self.data["surah_no"] == surah_num][["surah_no", "surah_name_roman", "ayah_no_surah", "ayah_memorized", "juz_no"]]
+    def make_mock_surah_list(self):
+        df = pd.DataFrame()
+        for surah_num in range(1,NUM_SURAH+1):
+            first_ayah = self.data[self.data["surah_no"] == surah_num].iloc[[0]][["surah_no", "surah_name_roman", "ayah_no_surah", "juz_no"]]
+            df = pd.concat([df, first_ayah])
+        return df
     def view_ayah_memorized(self, surah_num, ayah_nums):
         memorized = False
         if  self.view_ayah(surah_num, ayah_nums)["ayah_memorized"].all():
@@ -55,8 +62,9 @@ class DataManager():
 
 if __name__ == "__main__": #checks if this is imported module
     app = DataManager()
-    print(app.view_ayah(78,[1])["juz_no"].item())
-    print(app.view_surah_juz_num(78))
+    print(app.make_mock_surah_list())
+    # print(app.view_ayah(78,[1])["juz_no"].item())
+    # print(app.view_surah_juz_num(78))
     # print(app.view_ayah_memorized(1,[2,3,4]))
     # print(app.view_ayah(1,[2,3,4]))
 
