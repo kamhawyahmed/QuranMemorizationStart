@@ -10,11 +10,7 @@
     <script type="text/javascript" src="static/memorization.js"></script>
 </head>
 <body>
-{% if app_on == False: %}
-    <form method="POST">
-        <input class="button-3" type="submit" name="app_on" value="Turn on app">
-    </form>
-{% else: %}
+
     <div class="memorized_header">
         <h1>Qur'an Memorization Tracker</h1>
 
@@ -64,7 +60,6 @@
         {% endfor %}
     </form>
     </div>
-{% endif %}
 
 </body>
 </html>
