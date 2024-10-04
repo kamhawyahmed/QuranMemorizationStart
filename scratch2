@@ -1,0 +1,55 @@
+from typing import List
+from typing import Optional
+from sqlalchemy import ForeignKey
+from sqlalchemy.orm import DeclarativeBase
+from sqlalchemy.orm import Mapped
+from sqlalchemy.orm import mapped_column
+from sqlalchemy.orm import relationship
+from sqlalchemy import Integer, String, Float
+
+
+class Base(DeclarativeBase):
+    pass
+
+class QuranData(Base): 
+    # __table__ = db.metadatas[None].tables['quran_data']
+    __tablename__ = "quran_data"
+    index: Mapped[int] = mapped_column(Integer, primary_key=True, unique=True)
+    surah_no: Mapped[int] = mapped_column(Integer)
+
+
+from sqlalchemy import create_engine
+engine = create_engine("sqlite:///quran_data.db", echo=True)
+
+Base.metadata.create_all(engine) #lazy init to not lazy - not sure if needed in real projects
+
+from sqlalchemy.orm import Session
+from sqlalchemy import select
+
+with Session(engine) as session:
+    stmt = select(QuranData)
+    for ayah in session.scalars(stmt):
+        print(ayah.index)
+    # scalar = session.scalar(stmt)
+    # print(scalar)
+   
+
+
+#     sandy_address = session.scalars(stmt).one()
+#     print(sandy_address)
+
+# stmt = select(User).where(User.name == "patrick")
+# patrick = session.scalars(stmt).one()
+# patrick.addresses.append(Address(email_address="patrickstar@sqlalchemy.org"))
+# sandy_address.email_address = "sandy_cheeks@sqlalchemy.org"
+
+# session.commit()
+
+# sandy = session.get(User, 2)
+
+# sandy.addresses.remove(sandy_address)
+# session.flush() #alt to remove for what is in session - produces less sql commands
+
+# session.delete(patrick) #sets up, not deleted yet - also deletes items with which has relationships i.e. addresses table row for patrick
+# session.commit()
+

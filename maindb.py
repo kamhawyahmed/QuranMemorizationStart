@@ -13,8 +13,9 @@ from flask import Flask
 from flask import render_template
 from flask import request
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
-from sqlalchemy import Integer, String, Float
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
+from sqlalchemy import Integer, String, Float, ForeignKey
+from typing import List
 import QuranDataManager
 import sqlite3
 
@@ -32,30 +33,50 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///quran_data.db"
 db = SQLAlchemy(model_class=Base)
 db.init_app(app)
 
-class Book(db.Model): 
-    id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    title: Mapped[str] = mapped_column(String(250), unique=True, nullable=False)
-    author: Mapped[str] = mapped_column(String(250), nullable=False)
-    rating: Mapped[float] = mapped_column(Float, nullable=False)
+# with app.app_context(): #open the app
+#     db.reflect()
+
+
+class Surah(db.Model):
+    __tablename__ = "surah"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, unique=True)
+    surah_no: Mapped[int] = mapped_column(Integer, unique=True)
+    total_ayah_surah: Mapped[int] = mapped_column(Integer)
+    juz_no: Mapped[int] = mapped_column(Integer)
+    surah_name_roman: Mapped[str] = mapped_column(String)
+    surah_name_en: Mapped[str] = mapped_column(String)
+    surah_name_ar: Mapped[str] = mapped_column(String)
+    place_of_revelation: Mapped[str] = mapped_column(String)
+
+
+
+    ayat: Mapped[List["Ayah"]] = relationship(back_populates="surah")
+    # Optional: this will allow each book object to be identified by its title when printed.
+    def __repr__(self):
+        return f'< Surah {self.surah_no}, Ayat: {self.ayat} >'
+
+class Ayah(db.Model): 
+    __tablename__ = "ayah"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, unique=True)
+    surah_name_roman: Mapped[str] = mapped_column(String)
+    surah_no: Mapped[int] = mapped_column(ForeignKey("surah.surah_no"))
+    juz_no: Mapped[int] = mapped_column(Integer)
+    ayah_no_surah: Mapped[int] = mapped_column(Integer)
+    ayah_memorized: Mapped[int] = mapped_column(Integer)
+    surah: Mapped["Surah"] = relationship(back_populates="ayat")
 
     # Optional: this will allow each book object to be identified by its title when printed.
     def __repr__(self):
-        return f'<Book {self.title}>'
+        return f'<Ayah {self.surah_no}:{self.ayah_no_surah}>'
 
 with app.app_context(): #open the app
-    db.reflect()
     db.create_all()
-
-
-# with app.test_request_context():
-#     print(url_for('update', username='John-Doe'))
-
 
 
 surah_shown_index = 1
 memorized_surahs = []
 surah_list = backend.make_mock_surah_list()
-
+    
 
 
 app_on = True
@@ -68,13 +89,15 @@ def test():
     return render_template("test.html", app_on=app_on)
 
 @app.route('/', methods=['GET', 'POST'])
-def quran_memorization_page():
+def quran_memorization_page(memorized_surahs=memorized_surahs):
     if request.method == 'POST':
         print(request.form)
 
         if "show_memorized" in request.form:
-            # result = db.session.execute(db.select(Book).order_by(Book.title))
-            show_memorized_surah()
+            print("show_memorized")
+            result = db.session.execute(db.select(Ayah).order_by(Ayah.id))
+            memorized_surahs_db = [ayah.surah_name_roman for ayah in result.scalars()]
+            print(f"mem_surah_db = {memorized_surahs}")
         else:
             for key in request.form.keys():
                 if key.split("_")[1] == "surah":
@@ -86,21 +109,12 @@ def quran_memorization_page():
     for idx, surah in surah_list[surah_list["juz_no"] == 1].iterrows():
         print(surah["juz_no"])
         # print(type(surah_list[surah_list["juz_no"] == 1]))
-    return update_page()
+    return render_template("memorization.html", memorized_surahs = memorized_surahs, memorized_surahs_db = memorized_surahs_db,backend = backend, app_on = app_on, surah_shown_index = surah_shown_index, surah_list = surah_list)
 
 def toggle_app():
     global app_on
     app_on = not app_on
     return
-
-def show_memorized_surah():
-    print("hi")
-    global memorized_surahs
-    memorized_surahs = []
-
-    for surah_name in backend.return_memorized_ayat()["surah_name_roman"]:
-        memorized_surahs.append(surah_name)
-    memorized_surahs = list(set(memorized_surahs))
 
 def select_surah():
     global surah_shown_index
@@ -120,10 +134,6 @@ def toggle_memorized_ayah():
         surah_toggle_num, ayah_toggle_num = [int(s) for s in key.split("_") if s.isdigit()][0:2]
     backend.mark_ayah(surah_toggle_num, [ayah_toggle_num])
     return
-
-def update_page():
-    return render_template("memorization.html", memorized_surahs = memorized_surahs, backend = backend, app_on = app_on, surah_shown_index = surah_shown_index, surah_list = surah_list)
-
 
 if __name__ == "__main__":
     app.run(debug=True)
