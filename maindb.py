@@ -77,6 +77,10 @@ surah_shown_index = 1
 memorized_surahs = []
 surah_list = backend.make_mock_surah_list()
     
+def show_memorized_surahs():
+    result = db.session.execute(db.select(Ayah).order_by(Ayah.id).where(Ayah.ayah_memorized == 1))
+    memorized_surahs = set([ayah.surah_name_roman for ayah in result.scalars()])
+    return memorized_surahs
 
 
 app_on = True
@@ -94,10 +98,7 @@ def quran_memorization_page(memorized_surahs=memorized_surahs):
         print(request.form)
 
         if "show_memorized" in request.form:
-            print("show_memorized")
-            result = db.session.execute(db.select(Ayah).order_by(Ayah.id))
-            memorized_surahs_db = [ayah.surah_name_roman for ayah in result.scalars()]
-            print(f"mem_surah_db = {memorized_surahs}")
+            memorized_surahs = show_memorized_surahs()
         else:
             for key in request.form.keys():
                 if key.split("_")[1] == "surah":
@@ -109,7 +110,9 @@ def quran_memorization_page(memorized_surahs=memorized_surahs):
     for idx, surah in surah_list[surah_list["juz_no"] == 1].iterrows():
         print(surah["juz_no"])
         # print(type(surah_list[surah_list["juz_no"] == 1]))
-    return render_template("memorization.html", memorized_surahs = memorized_surahs, memorized_surahs_db = memorized_surahs_db,backend = backend, app_on = app_on, surah_shown_index = surah_shown_index, surah_list = surah_list)
+    return render_template("memorization.html", memorized_surahs = memorized_surahs,backend = backend, app_on = app_on, surah_shown_index = surah_shown_index, surah_list = surah_list)
+
+
 
 def toggle_app():
     global app_on
