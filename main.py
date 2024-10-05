@@ -1,6 +1,13 @@
+#PYTHONANYWHERE SETUP INSTRUCTIONS -
+# del folder
+# git clone github
+# pip3.10 install --user -r requirements.txt
+# error codes ignore
+
 # TODO list
 # TODO MAKE PRETTY HOME PAGE
 # TODO MAKE PRETTY SURAH PAGE
+# TODO MERGE THSI WITH REST OF PYANYWHERE SITE
 # Add class for table even though never adding new records but to refer to them -
 #   maybe dont have to define all col's and maybe will crash if applying - found it DONE
 # Convert from 1 page site to multi page - DONE
@@ -18,6 +25,7 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 from sqlalchemy import Integer, String, Float, ForeignKey
 from typing import List
 
+#
 
 
 app = Flask(__name__)
