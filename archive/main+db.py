@@ -7,7 +7,7 @@
 from flask import Flask
 from flask import render_template
 from flask import request
-import QuranDataManager
+from archive import QuranDataManager
 import sqlite3
 
 NUM_SURAH = 114

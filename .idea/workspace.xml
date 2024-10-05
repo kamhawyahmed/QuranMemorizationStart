@@ -4,21 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0dabc7a1-f9c7-4a38-96dc-041c285e9333" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/main_csv.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/QuranMemorizationStart.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/QuranMemorizationStart.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="0dabc7a1-f9c7-4a38-96dc-041c285e9333" name="Changes" comment="final db multipage refactor version&#10;adding idea files">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/instance/quran_data.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/quran_data.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/maindbmultipage.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/quran_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/quran_data.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/memorization_home.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/memorization_home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/memorization_old.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/memorization_surah.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/memorization_surah.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuranDataManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/archive/QuranDataManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/archive/main+db.py" beforeDir="false" afterPath="$PROJECT_DIR$/archive/main+db.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/archive/main_csv.py" beforeDir="false" afterPath="$PROJECT_DIR$/archive/main_csv.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/archive/maindb.py" beforeDir="false" afterPath="$PROJECT_DIR$/archive/maindb.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/archive/scratch.py" beforeDir="false" afterPath="$PROJECT_DIR$/archive/scratch.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,6 +97,55 @@
       <option name="presentableId" value="Default" />
       <updated>1728095912357</updated>
     </task>
+    <task id="LOCAL-00001" summary="final db multipage refactor version">
+      <option name="closed" value="true" />
+      <created>1728100719028</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1728100719028</updated>
+    </task>
+    <task id="LOCAL-00002" summary="final db multipage refactor version&#10;adding idea files">
+      <option name="closed" value="true" />
+      <created>1728100733886</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1728100733886</updated>
+    </task>
+    <task id="LOCAL-00003" summary="final db multipage refactor version&#10;adding idea files">
+      <option name="closed" value="true" />
+      <created>1728100749895</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1728100749895</updated>
+    </task>
+    <task id="LOCAL-00004" summary="final db multipage refactor version&#10;adding idea files">
+      <option name="closed" value="true" />
+      <created>1728100753268</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1728100753268</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="final db multipage refactor version" />
+    <MESSAGE value="final db multipage refactor version&#10;adding idea files" />
+    <option name="LAST_COMMIT_MESSAGE" value="final db multipage refactor version&#10;adding idea files" />
   </component>
 </project>

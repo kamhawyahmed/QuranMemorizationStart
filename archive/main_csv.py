@@ -7,13 +7,7 @@
 from flask import Flask
 from flask import render_template
 from flask import request
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
-from sqlalchemy import Integer, String, Float
 import QuranDataManager
-import sqlite3
-
-
 
 backend = QuranDataManager.DataManager()
 app = Flask(__name__)

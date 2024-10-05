@@ -12,7 +12,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
-from sqlalchemy import Integer, String, Float, ForeignKey
+from sqlalchemy import Integer, String, ForeignKey
 from typing import List
 import QuranDataManager
 
