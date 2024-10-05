@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>QMTracker</title>
+    <link rel="stylesheet" href="../static/memorization.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../static/memorization.js"></script>
+</head>
+<body>
+
+    <div class="memorized_header">
+        <h1>Surah Page</h1>
+
+    </div>
+    <div style="padding: 15px;">
+       <a href="{{url_for('home')}}">home</a>
+    </div>
+    <div class="all_surah" id="all_surah">
+    <form method="POST", id="toggle_ayat">
+        <div class="surah_div">
+            <div class="surah_name">
+                <input class="{{'memorized' if surah_selected.surah_memorized == 1 else 'unmemorized'}} surah" type="submit" name="toggle_surah_{{surah_selected.surah_no}}" value="{{surah_selected.surah_name_roman}} - {{surah_selected.surah_no}}">
+            </div>
+            {% for j in range(0,surah_selected.total_ayah_surah) %}
+            <div class="ayah">
+                <div class="ayah_num_div">
+                    <input class= "{{'memorized' if backend.view_ayah_memorized(surah_shown_index,[j]) else 'unmemorized'}} ayah_num"type="submit" name="toggle_ayah_{{surah_selected.ayat}}_{{j+1}}" value="{{j+1}}">
+
+                </div>
+                <div class="ayah_text_div">
+                    <p class="ayah_text">{{surah_selected.ayat[j]}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </form>
+    </div>
+
+</body>
+</html>

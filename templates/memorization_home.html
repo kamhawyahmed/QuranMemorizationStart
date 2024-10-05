@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>QMTracker</title>
+    <link rel="stylesheet" href="static/memorization.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="static/memorization.js"></script>
+</head>
+<body>
+
+    <div class="memorized_header">
+        <h1>Home Page</h1>
+
+    </div>
+    <div class="misc">
+        <h2>Surah List</h2>
+        <div class="surah_list">
+            {% for i in range(1,30 + 1) %}
+                <div class="juz {{i}}" style="background-color: #EBEBEB">
+                    <p>Juz' {{i}}</p>
+                    {% for surah in surahs %}
+                        {% if surah.juz_no == i %}
+                            <a 
+                            href="{{ url_for('select', surah_no = surah.surah_no)}}" 
+                            class="{{'memorized' if surah.surah_memorized == 1 else 'unmemorized'}} surah_list_surah" 
+                            name="select_{{surah['surah_no']}}">
+                            {{surah.surah_no}} | {{surah.surah_name_roman}}
+                            </a>
+                        {% endif %}
+                    {% endfor %} 
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

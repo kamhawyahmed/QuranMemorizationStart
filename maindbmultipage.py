@@ -46,6 +46,7 @@ class Surah(db.Model):
     surah_name_en: Mapped[str] = mapped_column(String)
     surah_name_ar: Mapped[str] = mapped_column(String)
     place_of_revelation: Mapped[str] = mapped_column(String)
+    surah_memorized: Mapped[int] = mapped_column(Integer)
 
 
 
@@ -74,11 +75,10 @@ with app.app_context(): #open the app
 
 surah_shown_index = 1
 memorized_surahs = []
-surah_list = backend.make_mock_surah_list()
+# surah_list = backend.make_mock_surah_list()
 surah_selected = []
     
 
-# with app.test_request_context():
 #     print(surah)
 
 app_on = True
@@ -90,33 +90,36 @@ def test():
             toggle_app()
     return render_template("test.html", app_on=app_on)
 
-@app.route('/', methods=['GET', 'POST'])
-def quran_memorization_page(memorized_surahs=memorized_surahs):
-    if request.method == 'POST':
-        print(request.form)
+@app.route('/', methods=['GET'])
+def home():
+    result = db.session.execute(db.select(Surah))
+    surahs = result.scalars().all()
 
-        if "show_memorized" in request.form:
-            memorized_surahs = show_memorized_surahs()
+    return render_template("memorization_home.html", surahs = surahs)
 
-        else:
-            for key in request.form.keys():
-                if key.split("_")[1] == "surah":
-                    toggle_memorized_surah()
-                elif key.split("_")[1] == "ayah":
-                    toggle_memorized_ayah()
-                elif key.split("_")[0] == "select":
-                    select_surah()
-    for idx, surah in surah_list[surah_list["juz_no"] == 1].iterrows():
-        print(surah["juz_no"])
-        # print(type(surah_list[surah_list["juz_no"] == 1]))
-    return render_template("memorization.html", memorized_surahs = memorized_surahs, surah= surah_selected, backend = backend, app_on = app_on, surah_shown_index = surah_shown_index, surah_list = surah_list)
+# @app.route('/surah/<surah_no>', methods=['GET', 'POST'])
+# def select(surah_no = 1, memorized_surahs=memorized_surahs, surah_selected = surah_selected):
+#     if request.method == 'POST':
+#         for key in request.form.keys():
+#             if key.split("_")[1] == "surah":
+#                 toggle_memorized_surah()
+#             elif key.split("_")[1] == "ayah":
+#                 toggle_memorized_ayah()
+#             elif key.split("_")[0] == "select":
+#                 select_surah()
+#     return render_template("memorization_surah.html", memorized_surahs = memorized_surahs, surah= surah_selected, backend = backend, app_on = app_on, surah_shown_index = surah_shown_index, surah_list = surah_list)
 
+#TODO show ayat surah and memorization status on href
+#TODO update ayah memorization status on click
+#TODO update surah memorization status on click
 
-
-def toggle_app():
-    global app_on
-    app_on = not app_on
-    return
+@app.route('/surah/<surah_no>', methods=['GET', 'POST'])
+def select(surah_no):
+    result = db.session.execute(db.select(Surah).where(Surah.surah_no == surah_no))
+    surah_selected = result.scalar()
+    result = db.session.execute(db.select(Surah))
+    surah_list = result.scalars().all()
+    return render_template("memorization_surah.html", surah_selected = surah_selected, surah_list = surah_list, backend = backend, surah_shown_index = surah_shown_index)
 
 def show_memorized_surahs():
     result = db.session.execute(db.select(Ayah).order_by(Ayah.id).where(Ayah.ayah_memorized == 1))
@@ -130,7 +133,7 @@ def select_surah():
         surah_shown_index = [int(s) for s in key.split("_") if s.isdigit()][0]
         result = db.session.execute(db.select(Surah).where(Surah.surah_no == surah_shown_index))
         surah_selected = result.scalar()
-    return redirect(url_for('quran_memorization_page'))
+    return redirect(url_for('home'))
 
 
 def toggle_memorized_surah():
@@ -144,6 +147,20 @@ def toggle_memorized_ayah():
     for key in request.form.keys():
         surah_toggle_num, ayah_toggle_num = [int(s) for s in key.split("_") if s.isdigit()][0:2]
     backend.mark_ayah(surah_toggle_num, [ayah_toggle_num])
+    return
+
+def update_surah_memorized_manually():
+    with app.test_request_context():
+        result = db.session.execute(db.select(Surah))
+        surah_list = result.scalars().all()
+        for surah in surah_list:
+            surah_memorized = 1
+            for ayah in surah.ayat:
+                if ayah.ayah_memorized == 0:
+                    surah_memorized = 0
+                    print(surah.surah_no, ayah.ayah_no_surah, ayah.ayah_memorized, surah_memorized)
+            surah.surah_memorized = surah_memorized
+        db.session.commit()
     return
 
 if __name__ == "__main__":
