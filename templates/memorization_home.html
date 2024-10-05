@@ -24,7 +24,7 @@
                     {% for surah in surahs %}
                         {% if surah.juz_no == i %}
                             <a 
-                            href="{{ url_for('select', surah_no = surah.surah_no)}}" 
+                            href="{{ url_for('surah', surah_no = surah.surah_no)}}"
                             class="{{'memorized' if surah.surah_memorized == 1 else 'unmemorized'}} surah_list_surah" 
                             name="select_{{surah['surah_no']}}">
                             {{surah.surah_no}} | {{surah.surah_name_roman}}

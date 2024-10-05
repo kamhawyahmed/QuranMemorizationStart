@@ -10,7 +10,7 @@ class DataManager():
     def __init__(self):
         #self.data = pd.read_csv("quran_data.csv", index_col = False)
         ##when exporting to pythonanywhere add path file here
-        self.data = pd.read_csv("quran_data.csv", index_col = False)
+        self.data = pd.read_csv("archive/quran_data.csv", index_col = False)
 
     def view_data(self):
         data_info = [self.data.info(), self.data.describe(), self.data.columns]
