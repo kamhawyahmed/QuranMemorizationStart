@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$USER_HOME$/PycharmProjects/QuranMemorizationStart/.idea/QuranMemorizationStart.iml" filepath="$USER_HOME$/PycharmProjects/QuranMemorizationStart/.idea/QuranMemorizationStart.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/QuranMemorizationStart.iml" filepath="$PROJECT_DIR$/.idea/QuranMemorizationStart.iml" />
     </modules>
   </component>
 </project>
